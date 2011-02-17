@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /private/
+Disallow: /blog/
+Dissalow: /functions.php
+Dissalow: /test/
+Dissalow: /old/
+Dissalow: /add.php
+Dissalow: /editarticle.php

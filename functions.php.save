@@ -1,0 +1,98 @@
+<?php
+
+//Function to start connection to the database.
+function connect() {
+	$conn = mysql_connect('niko.db','niko7865','QwPoASlk2$');
+	if (!$conn) die('Error connecting to server!');
+		mysql_select_db('christmas', $conn) or die('Error selecting database');
+	return $conn;
+}
+
+//Function to close all connections to the database
+function closeconnection($conn) {
+	mysql_close($conn);
+}
+
+//Function which displays the entire list of articles, linking each article to its single
+function showAllArticles() {
+	$conn = connect(); //start connection
+	
+	$sql = "SELECT * FROM articles";
+	$result = mysql_query($sql);
+	if($result) {
+		while($row=mysql_fetch_array($result)) {
+			echo '<a href="article.php?id='.$row['id'].'">'.$row['articleLTitle'].'</a> - <a href="editarticle.php?id='.$row['id'].'">EDIT</a> - <a href="articlefunctions.php?a=delete&id='.$row['id'].'">DELETE</a><br />';	
+		}
+	}
+		
+	closeconnection($conn);
+}
+
+function getArticle($id) {
+	$conn = connect();
+	$sql = "SELECT * FROM articles WHERE id='$id'";
+	$result = mysql_query($sql);
+	if($result) {
+		$row = mysql_fetch_assoc($result);
+		$articleinfo[] = $row;
+	}
+	return $articleinfo;
+	closeconnection($conn);
+}
+function displayAllArticles($type) {
+	$conn = connect(); //start connection
+	
+	for
+	$sql = "SELECT * FROM articles WHERE category='$type' AND desire='$des' ORDER BY articlePrice ASC";
+	$result = mysql_query($sql);
+
+	if($result) {
+		while($row=mysql_fetch_array($result)) {
+        		$title = htmlspecialchars($row[imageTitle]);
+			$bytes = $row[articleImage];
+			echo '<a href="'.$row['url'].'" target="_blank">
+			<div class="article" id="article'.$row['id'].'">
+			<h2 class="alignleft">'.$row["articleTitle"].'</h2><h2 class="alignright">$'.$row["articlePrice"].'</h2>
+			<div style="clear: both;"></div><div class="line"></div><div class="articleBody clear"><div class="figure">
+			<img src="getimg.php?img='.$row['id'].'" height="230" alt="'.$row["articleTitle"].'" /></div>
+			<p>'.$row['articleContent'].'</p>
+			</div><h4>Added: '.$row['dtime'].'</h4></div></a>';	
+		}
+	}
+	closeconnection($conn);
+}
+function displayCategories() {
+	$conn = connect(); //start connection
+	
+	$sql = "SELECT * FROM articles WHERE category='cat' ORDER BY id ASC";
+	$result = mysql_query($sql);
+
+	if($result) {
+		while($row=mysql_fetch_array($result)) {
+        		$title = htmlspecialchars($row[imageTitle]);
+			$bytes = $row[articleImage];
+			echo '<a href="'.$row['url'].'">
+			<div class="article" id="article'.$row['id'].'">
+			<h2 class="alignleft">'.$row["articleTitle"].'</h2>
+			<div style="clear: both;"></div><div class="line"></div><div class="articleBody clear"><div class="figure">
+			<img src="getimg.php?img='.$row['id'].'" height="230" alt="'.$row["articleTitle"].'" /></div>
+			<p>'.$row['articleContent'].'</p>
+			</div></div></a>';	
+		}
+	}
+	closeconnection($conn);
+}
+function displayNav() {
+	$conn = connect(); //start connection
+	
+	$sql = "SELECT * FROM articles WHERE category='cat' ORDER BY id ASC";
+	$result = mysql_query($sql);
+
+	if($result) {
+		while($row=mysql_fetch_array($result)) {
+			echo '<li><a href="'.$row[url].'">'.$row[articleTitle].'</a></li>';	
+		}
+	}
+	closeconnection($conn);
+}
+?>
