@@ -41,7 +41,7 @@ a img{
 
 /* Headings: */
 
-h1,h2,h3,h4{
+h1,h2,h3,h4,h5,h6{
 	font-family:"Myriad Pro","Helvetica Neue",Helvetica,Arial,Sans-Serif;
 	text-shadow:0 1px 1px black;
 }
@@ -62,6 +62,7 @@ h3{
 }
 
 h2{
+	/* article headers */
 	font-size:2.2em;
 	font-weight:normal;
 	letter-spacing:0.01em;
@@ -69,11 +70,23 @@ h2{
 }
 
 h4{
+	/* article footers */
 	font-size:0.7em;
 	text-shadow:none;
 	color:#878787;
 }
-
+h5{
+	/* comment author */
+	font-size:1em;
+	text-shadow:none;
+}
+h6{
+	/* comment time */
+	font-size:0.7em;
+	text-shadow:none;
+	color:#878787;
+	margin:0.5em;
+}
 .alignleft{
 	float:left;
 }
@@ -215,7 +228,11 @@ div.nav2, div.nav2 ul li a{
 	margin:0 auto;
 	position:relative;
 }
-
+div.commentBody{
+	width:650px;
+	margin:0 auto;
+	position:relative;
+}
 div.article{
 	background-color:#ffffff;
 	margin:3em 0;

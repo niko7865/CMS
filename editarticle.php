@@ -4,10 +4,11 @@
 	$id = $_POST['id'];
 	$action = $_POST['action'];
 	$url = $_POST['url'];
-	if (isloggedin() && isset($id)) {
+	if (isLoggedIn() && isset($id) && isAdmin()) {
 	$info = getArticle($id);
 	foreach($info as $key) {
-echo '<html>
+echo '
+<html>
 	<head>
 		<title>Add an entry to the database</title>
 		<style type="text/css">
@@ -182,12 +183,20 @@ echo '<html>
 							echo '</select></h2>
 						<div class="clear"></div>
 						<br />
-						<h2 class="alignleft"><input name="web" type="text" id="web" placeholder="URL" value="'.$key["url"].'" /></h2>
-						<h2 class="alignright"><input name="person" type="text" id="person" placeholder="NAME" value="'.$key["articlePerson"].'" /></h2>
+						<h2 class="alignleft">
+							<input name="web" type="text" id="web" placeholder="URL" value="'.$key["url"].'" />
+						</h2>
+						<h2 class="alignright">
+							<input name="person" type="text" id="person" placeholder="NAME" value="'.$key["articlePerson"].'" />
+						</h2>
 						<div class="clear"></div>
 						<br />
-						<h2 class="alignleft"><input name="atitle" type="text" id="atitle" placeholder="TITLE" value="'.$key["articleTitle"].'" /></h2>
-						<h2 class="alignright"><input name="price" type="number" id="price" min="0" step="1" value="'.$key["articlePrice"].'" /></h2>
+						<h2 class="alignleft">
+							<input name="atitle" type="text" id="atitle" placeholder="TITLE" value="'.$key["articleTitle"].'" />
+						</h2>
+						<h2 class="alignright">
+							<input name="price" type="number" id="price" min="0" step="1" value="'.$key["articlePrice"].'" />
+						</h2>
 						<div class="clear"></div>
 						<br />
 						<div class="line"></div>
@@ -206,8 +215,18 @@ echo '<html>
 						<input type="hidden" name="completed" value="1" />
 						<input type="hidden" name="url" value="'.$url.'" />
 						<input type="hidden" name="id" value="'.$id.'" />
-						<h2 class="alignright"><input type="submit" value="Submit" id="submit"/></h2>
+						<h4 class="alignleft">
+							<input type="submit" value="Submit" id="submit"/>
+						</h4>
 					</form>
+					<h4 class="alignright">
+						<form enctype="multipart/form-data" action="deletearticle.php?" method="post">
+							<input type="hidden" name="id" value="'.$id.'">
+							<input type="hidden" name="action" value="delete">
+							<input type="hidden" name="url" value="'.$url.'">
+							<input type="submit" value="Delete"/>
+						</form>
+					</h4>
 				</div>
 			</div>
 		</div>

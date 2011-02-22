@@ -1,7 +1,8 @@
 <?php
 	require_once("functions.php");
+	require_once("userfunc.php");
 	$conn = connect();
-	if ($_COOKIE["user"] == 'niko'){
+	if (isAdmin()){
 		if ($_REQUEST[completed] == 1) {
 			$cat = mysql_real_escape_string($_POST['cat']);
 			$web = mysql_real_escape_string($_POST['web']);

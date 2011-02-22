@@ -14,6 +14,7 @@ function siteLogin($url) {
 			/* sets the cookie with a name that of the user, value of the users rank,
 			expire of two hours, path of everything, single domain, non-secure, httponly */
 			setcookie("session",$row['userRank'],time()+7200);
+			setcookie("userid",$row['id'],time()+7200);
 			header("Location: $url");
 		} else {
 			echo 'Incorrect!';
