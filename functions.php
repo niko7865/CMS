@@ -2,7 +2,7 @@
 
 //Function to start connection to the database.
 function connect() {
-	$conn = mysql_connect('niko.db','niko7865','QwPoASlk2$');
+	$conn = mysql_connect('database','user','password');
 	if (!$conn) die('Error connecting to server!');
 		mysql_select_db('christmas', $conn) or die('Error selecting database');
 	return $conn;
